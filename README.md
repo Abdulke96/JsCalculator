@@ -17,7 +17,7 @@
 4. Click the  `=`  button to calculate the result.
  ## Dependencies
  The calculator uses the Math.js library (version 9.0.0) to evaluate mathematical expressions: https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.0.0/math.min.js
- ## Notes
+ ## Notes:
  - The calculator uses the  `**`  operator internally for exponentiation while displaying  `^`  on the display for user readability.
 - The calculator does not support keyboard input at the moment. Only button clicks are allowed for input.
  ## Future Improvements
