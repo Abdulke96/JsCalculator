@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    body {
+      background-color:white;
+    }
+
+    button {
+      background-color: #1a1918;
+      border: green;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration:none ;
+      display: inline-block;
+      font-size: 24px;
+      margin: 4px 5px;
+      cursor: pointer;
+      width: 50px;
+      border-radius: 17px;
+    }
+
+    .hover {
+      background-color: #f0e7e3;
+      color: rgb(241, 30, 203);
+    }
+
+    .active {
+      background-color: #e8f2e9;
+      box-shadow: 0 10px #666;
+      transform: translateY(4px);
+    }
+    #display-container {
+      background-color: #8fdd8d;
+      padding: 10px;
+      border: 2px solid rgb(221, 2, 2);
+      height: 40px;
+      width: 387Px;
+      text-align: left;
+      font-size: 24px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      margin: 140px 0 0px 380px;
+    }
+
+    #calculator{
+      background-color:#e9e3e3;
+      padding: 20px;
+      border: 3px solid rgb(238, 18, 18);
+      text-align: center;
+      height: 280px;
+      width: 390px;
+      margin: 200px 0 0 370px;
+    }
+
+    button.operator {
+      background-color: #58b73c;
+      width: 20px;
+    }
+
+    button.function {
+      background-color: #5f9ea0;
+      width: 30px;
+    }
+
+    button.clear {
+      background-color: #a52a2a;
+    }
+
+    button:hover, button:active {
+      color: rgb(67, 12, 218);
+    }
+    .display {
+      background-color: #edfaf7;
+      padding: 10px;
+      border: 3px solid rgb(221, 2, 2);
+      height: 40px;
+      width: 410Px;
+      text-align: left;
+      font-size: 30px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      margin: 138px 0 0px 378px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.0.0/math.min.js"></script>
+</head>
+
+<body>
+
+  <div id="display-container">
+    <input id="display" class="display" type="text" value="0">
+  </div>
+
+  <div id="calculator">
+
+    <button class="number" onclick="addToDisplay(1)">1</button>
+    <button class="number" onclick="addToDisplay(2)">2</button>
+    <button class="number" onclick="addToDisplay(3)">3</button>
+    <button class="number" onclick="addToDisplay(4)">4</button>
+    <button class="operator" onclick="addToDisplay('+')">+</button>
+    <br>
+    <button class="number" onclick="addToDisplay(5)">5</button>
+    <button class="number" onclick="addToDisplay(6)">6</button>
+    <button class="number" onclick="addToDisplay(7)">7</button>
+    <button class="number" onclick="addToDisplay(8)">8</button>
+    <button class="operator" onclick="addToDisplay('-')">-</button>
+    <br>
+    <button class="number" onclick="addToDisplay(9)">9</button>
+    <button class="number" onclick="addToDisplay(0)">0</button>
+    <button class="function" onclick="addToDisplay('(')">(</button>
+    <button class="function" onclick="addToDisplay(')')">)</button>
+    <button class="operator" onclick="addToDisplay('*')">*</button>
+    <br>
+    <button class="clear" onclick="clearDisplay()">C</button>
+    <button class="operator" onclick="calculate()">=</button>
+    <button class="function" onclick="addToDisplay('.')">.</button>
+    <button class="function" onclick="addToDisplay('**')">^</button>
+    <button class="operator" onclick="addToDisplay('/')">/</button>
+  </div>
+
+  <script>
+    var display = document.getElementById("display");
+    var stack = [];
+    var decimalEntered = false;
+
+    function addToDisplay(value) {
+      if (stack.length === 0 && !isNumber(value) && value !== '.') {
+        return;
+      }
+      if (value === '.' && decimalEntered) {
+        return;
+      }
+      if (isOperator(value) || value === '**') {
+        decimalEntered = false;
+      }
+      if (display.value === "0" && value !== '.') {
+        display.value = value;
+      } else {
+        display.value += value;
+      }
+      if (isNumber(value) || value === '.') {
+        stack.push(value);
+      } else {
+        stack.push(getOperator(value));
+      }
+    }
+
+    function clearDisplay() {
+      display.value = "0";
+      stack = [];
+      decimalEntered = false;
+    }
+
+    function calculate() {
+        
+      var expression = stack.join('');
+      try {
+        var result = math.evaluate(expression);
+        display.value = result;
+        stack = [result.toString()];
+      } catch (e) {
+        display.value = "Error";
+        stack = [];
+      }
+      decimalEntered =  (display.value.includes(".")); 
+    } 
+     function isNumber(value) { 
+      return !isNaN(value); 
+    } 
+     function isOperator(value) { 
+      return value === '+' || value === '-' || value === '*' || value === '/'; 
+    } 
+    function getOperator(value) { 
+      if (value === '**') { 
+        return '^'; 
+      } 
+      return value; 
+    } 
+     </script> 
+ </body> 
+</html>
