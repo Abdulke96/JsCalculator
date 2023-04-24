@@ -1,24 +1,47 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
   <style>
+    /* Base styles */
     body {
       background-color:white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #calculator{
+      background-color:#e9e3e3;
+      padding: 20px;
+      border: 3px solid rgb(238, 18, 18);
+      text-align: center;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 12px;
+      
     }
 
     button {
       background-color: #1a1918;
       border: green;
       color: white;
-      padding: 15px 32px;
+      padding: 25px 35px;
       text-align: center;
       text-decoration:none ;
       display: inline-block;
       font-size: 24px;
-      margin: 4px 5px;
+      margin: 10px 3px;
       cursor: pointer;
-      width: 50px;
+      width: 20vw;
+      max-width: 50px;
       border-radius: 17px;
     }
 
@@ -32,37 +55,14 @@
       box-shadow: 0 10px #666;
       transform: translateY(4px);
     }
-    #display-container {
-      background-color: #8fdd8d;
-      padding: 10px;
-      border: 2px solid rgb(221, 2, 2);
-      height: 40px;
-      width: 387Px;
-      text-align: left;
-      font-size: 24px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      margin: 140px 0 0px 380px;
-    }
-
-    #calculator{
-      background-color:#e9e3e3;
-      padding: 20px;
-      border: 3px solid rgb(238, 18, 18);
-      text-align: center;
-      height: 280px;
-      width: 390px;
-      margin: 200px 0 0 370px;
-    }
 
     button.operator {
-      background-color: #58b73c;
+      background-color: #502306;
       width: 20px;
     }
 
     button.function {
-      background-color: #5f9ea0;
+      background-color: #664a9c;
       width: 30px;
     }
 
@@ -73,31 +73,54 @@
     button:hover, button:active {
       color: rgb(67, 12, 218);
     }
+
     .display {
       background-color: #edfaf7;
       padding: 10px;
       border: 3px solid rgb(221, 2, 2);
-      height: 40px;
-      width: 410Px;
-      text-align: left;
       font-size: 30px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      margin: 138px 0 0px 378px;
+      width: 90%;
+      border-radius: 12px;
+      margin: 40px auto;
+      text-align: right;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      button {
+        font-size: 18px;
+        padding: 10px 16px;
+        width: 25vw;
+        max-width: 60px;
+      }
+
+      .display {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      button {
+        font-size: 14px;
+        padding: 8px 12px;
+        width: 35vw;
+        max-width: 60px;
+      }
+
+      .display {
+        font-size: 18px;
+      }
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.0.0/math.min.js"></script>
 </head>
 
 <body>
-
-  <div id="display-container">
+  <div id="calculator">
+    
+<div id="display-container">
     <input id="display" class="display" type="text" value="0">
   </div>
-
-  <div id="calculator">
-
     <button class="number" onclick="addToDisplay(1)">1</button>
     <button class="number" onclick="addToDisplay(2)">2</button>
     <button class="number" onclick="addToDisplay(3)">3</button>
